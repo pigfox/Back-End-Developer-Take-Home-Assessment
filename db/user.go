@@ -4,7 +4,6 @@ import (
 	"bedtha/structs"
 	"bedtha/utils"
 	"errors"
-	"fmt"
 )
 
 func Register(user structs.User) (int, error) {
@@ -15,7 +14,7 @@ func Register(user structs.User) (int, error) {
 	defer db.Close()
 	statement, err := db.Prepare("INSERT INTO users (email, hash) VALUES (?,?)")
 	if err != nil {
-		fmt.Printf("Error: %s", err)
+		return 0, err
 	}
 
 	hash, err := utils.HashPassword(user.Password)

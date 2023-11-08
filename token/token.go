@@ -3,7 +3,6 @@ package token
 import (
 	"bedtha/config"
 	"bedtha/structs"
-	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"time"
 )
@@ -16,7 +15,7 @@ func New(email string) (string, error) {
 			ExpiresAt: expirationTime.Unix(),
 		},
 	}
-	fmt.Println(structs.JwtKey.Value)
+
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenStr, err := token.SignedString([]byte(structs.JwtKey.Value))
 	return tokenStr, err
