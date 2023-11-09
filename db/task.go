@@ -4,7 +4,6 @@ import (
 	"bedtha/config"
 	"bedtha/structs"
 	"fmt"
-	"strconv"
 )
 
 func Create(task structs.Task) (int, error) {
@@ -81,8 +80,8 @@ func List(page int) ([]structs.Task, error) {
 	}
 	defer db.Close()
 
-	query := "SELECT id, title, description, due_date, status FROM tasks LIMIT ?," + strconv.Itoa(config.RowsPerPage*page)
-	rows, err := db.Query(query, page-1)
+	query := "SELECT id, title, description, due_date, status FROM tasks ORDER BY id LIMIT ? OFFSET ?"
+	rows, err := db.Query(query, config.RowsPerPage, (page-1)*config.RowsPerPage)
 	if err != nil {
 		return nil, err
 	}
