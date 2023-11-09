@@ -3,7 +3,6 @@ package structs
 import "github.com/dgrijalva/jwt-go"
 
 var JwtKey JwtKeyObj
-var JwtToken JwtTokenObj
 
 type JwtKeyObj struct {
 	Value string `json:"value"`
