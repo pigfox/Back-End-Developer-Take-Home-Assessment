@@ -96,7 +96,8 @@ func Login(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	token := structs.JwtTokenObj{Token: tokenString}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
-	json.NewEncoder(w).Encode("Token:" + tokenString)
+	json.NewEncoder(w).Encode(token)
 }
